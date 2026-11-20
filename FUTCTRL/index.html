@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | FUTCTRL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Carrusel de portada */
+        .hero{position:relative;overflow:hidden;border-radius:1rem;border:1px solid #1e293b;height:340px;background:#0b1220;color:#fff}
+        .hero .slide{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .6s;display:flex;align-items:flex-end}
+        .hero .slide.on{opacity:1}
+        .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+        .hero .sombra{position:absolute;inset:0;background:linear-gradient(to top,rgba(2,6,23,.92),rgba(2,6,23,.05) 65%)}
+        .hero figcaption{position:relative;padding:1.5rem 3.5rem;max-width:42rem}
+        .hero .etq{font-size:.75rem;font-weight:700;color:#34d399}
+        .hero h2{margin:.2rem 0;font-size:1.6rem;font-weight:800}
+        .hero .credito{font-size:.7rem;color:#94a3b8;margin:0}
+        .hero .ant,.hero .sig{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid #334155;background:rgba(2,6,23,.7);color:#fff;cursor:pointer}
+        .hero .ant{left:.8rem}.hero .sig{right:.8rem}
+        .hero .puntos{position:absolute;right:1rem;bottom:1rem;z-index:2;display:flex;gap:.4rem}
+        .hero .puntos button{width:.7rem;height:.7rem;border-radius:50%;border:0;background:#475569;cursor:pointer;padding:0}
+        .hero .puntos button[aria-current="true"]{background:#34d399}
+        @media(max-width:640px){.hero{height:260px}.hero figcaption{padding:1rem 3rem}.hero h2{font-size:1.25rem}}
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+
+    <!-- Navbar Superior -->
+    <header class="border-b border-slate-800 bg-slate-950/70 sticky top-0 z-50 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="text-2xl font-black text-emerald-400 tracking-wider">FUTCTRL</a>
+                <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-medium">BETA 1.0</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="index.html" class="text-slate-300 hover:text-emerald-300 transition">Inicio</a>
+                <a href="carrera.html" class="text-slate-300 hover:text-emerald-300 transition">Modo Carrera</a>
+                <a href="partidos.html" class="text-slate-300 hover:text-emerald-300 transition">Partidos</a>
+                <a href="predicciones.html" class="text-slate-300 hover:text-emerald-300 transition">Predicciones</a>
+                <a href="entrenador.html" class="text-slate-300 hover:text-emerald-300 transition">Entrenador</a>
+                <a href="retos.html" class="text-slate-300 hover:text-emerald-300 transition">Retos</a>
+                <a href="clasificacion.html" class="text-slate-300 hover:text-emerald-300 transition">Clasificación</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="perfil.html" class="text-sm text-slate-300 hover:text-white transition">Perfil</a>
+                <a href="admin.html" class="text-sm text-slate-300 hover:text-white transition">Admin</a>
+                <a href="login.html" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-emerald-900/40">Entrar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- CARRUSEL DE CAMPEONES
+             Cada foto lista varias rutas en data-rutas (separadas por |): el carrusel prueba una tras otra. -->
+        <section id="hero" class="hero" aria-roledescription="carrusel" aria-label="Momentos históricos del fútbol">
+
+            <figure class="slide on" data-fondo="linear-gradient(135deg,#334155,#0f172a)">
+                <img data-rutas="assets/hero/SantosCampeon.jpg|assets/hero/santos.webp|assets/SantosCampeon.jpg|SantosCampeon.jpg" style="object-position:50% 55%" alt="Jugadores del Santos celebrando el título con el trofeo entre confeti">
+                <div class="sombra"></div>
+                <figcaption><span class="etq">Campeón</span><h2>Santos, campeón</h2><p class="credito">Foto: (fuente y autor)</p></figcaption>
+            </figure>
+
+            <figure class="slide" data-fondo="linear-gradient(135deg,#854d0e,#166534)">
+                <img data-rutas="assets/hero/PeleCampeon.jpeg|assets/hero/pele.jpg|assets/PeleCampeon.jpeg|PeleCampeon.jpeg" style="object-position:50% 20%" alt="Pelé llevado en hombros por la afición en el estadio tras ser campeón">
+                <div class="sombra"></div>
+                <figcaption><span class="etq">Campeón del mundo</span><h2>Pelé, campeón</h2><p class="credito">Foto: (fuente y autor)</p></figcaption>
+            </figure>
+
+            <figure class="slide" data-fondo="linear-gradient(135deg,#b91c1c,#1e293b)">
+                <img data-rutas="assets/hero/BayernChampions.jpg|assets/hero/bayern.jpg|assets/BayernChampions.jpg|BayernChampions.jpg" style="object-position:50% 8%" alt="Jugadores del Bayern de Múnich celebrando con la copa bajo el arco de campeones de la Champions League 2019/20">
+                <div class="sombra"></div>
+                <figcaption><span class="etq">Champions League 2019/20</span><h2>El Bayern, campeón de Europa</h2><p class="credito">Foto: (fuente y autor)</p></figcaption>
+            </figure>
+
+            <figure class="slide" data-fondo="linear-gradient(135deg,#0369a1,#0f172a)">
+                <img data-rutas="assets/hero/ArgentinaCampeon.jpeg|assets/hero/argentina.jpg|assets/ArgentinaCampeon.jpeg|ArgentinaCampeon.jpeg" style="object-position:50% 10%" alt="Jugadores de Argentina celebrando con la Copa del Mundo">
+                <div class="sombra"></div>
+                <figcaption><span class="etq">Campeón del mundo</span><h2>Argentina, campeona del mundo</h2><p class="credito">Foto: (fuente y autor)</p></figcaption>
+            </figure>
+
+            <button type="button" class="ant" aria-label="Imagen anterior">&#8249;</button>
+            <button type="button" class="sig" aria-label="Imagen siguiente">&#8250;</button>
+            <div class="puntos" role="group" aria-label="Elegir imagen"></div>
+        </section>
+
+        <!-- Sección de Partido Destacado -->
+        <section class="space-y-4">
+            <h2 class="text-lg font-bold text-slate-200">Próximo Partido Destacado</h2>
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-6 shadow-lg">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-xs text-slate-400">Jornada 7, sáb 24 oct, 18:30</span>
+                    <span class="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full font-semibold">Programado</span>
+                </div>
+                <div class="flex justify-around items-center my-4">
+                    <div class="text-center space-y-2 w-1/3">
+                        <div class="w-12 h-12 mx-auto bg-emerald-600/30 border border-emerald-500 rounded-full flex items-center justify-center font-bold text-emerald-300">RD</div>
+                        <div class="font-bold text-sm md:text-base">Real Demo CF</div>
+                    </div>
+                    <div class="text-lg font-black text-slate-500">VS</div>
+                    <div class="text-center space-y-2 w-1/3">
+                        <div class="w-12 h-12 mx-auto bg-indigo-600/30 border border-indigo-500 rounded-full flex items-center justify-center font-bold text-indigo-300">AF</div>
+                        <div class="font-bold text-sm md:text-base">Atlético Ficticio</div>
+                    </div>
+                </div>
+                <div class="mt-6 text-center">
+                    <a href="predicciones.html" class="inline-block bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-6 py-2.5 rounded-lg text-sm transition shadow-md">Hacer tu predicción</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tres Columnas: Progreso, Retos y Clasificación -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Tu Progreso -->
+            <div class="bg-slate-800/40 border border-slate-700/60 rounded-xl p-5 space-y-4">
+                <h3 class="font-bold text-slate-200">Tu progreso</h3>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between py-2 border-b border-slate-700/50">
+                        <span class="text-slate-400">Puntos</span>
+                        <span class="font-bold text-emerald-400">0</span>
+                    </div>
+                    <div class="flex justify-between py-2 border-b border-slate-700/50">
+                        <span class="text-slate-400">Predicciones resueltas</span>
+                        <span class="font-semibold">0</span>
+                    </div>
+                    <div class="flex justify-between py-2 border-b border-slate-700/50">
+                        <span class="text-slate-400">Aciertos de resultado</span>
+                        <span class="font-semibold">—</span>
+                    </div>
+                    <div class="flex justify-between py-2">
+                        <span class="text-slate-400">Retos respondidos</span>
+                        <span class="font-semibold">0/3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Retos Disponibles -->
+            <div class="bg-slate-800/40 border border-slate-700/60 rounded-xl p-5 space-y-4">
+                <h3 class="font-bold text-slate-200">Retos disponibles</h3>
+                <div class="space-y-3 text-xs">
+                    <div class="bg-slate-800 p-3 rounded-lg border border-slate-700/50 space-y-2">
+                        <p class="text-slate-300">Tu equipo juega 4-4-2 y el rival presiona alto. ¿Qué ajuste ayuda a sacar el balón jugando?</p>
+                        <a href="retos.html" class="inline-block bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1 rounded font-medium transition">Responder</a>
+                    </div>
+                    <div class="bg-slate-800 p-3 rounded-lg border border-slate-700/50 space-y-2">
+                        <p class="text-slate-300">¿Qué gana un 3-5-2 frente a un 4-4-2 en el centro del campo?</p>
+                        <a href="retos.html" class="inline-block bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1 rounded font-medium transition">Responder</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clasificación -->
+            <div class="bg-slate-800/40 border border-slate-700/60 rounded-xl p-5 space-y-4">
+                <h3 class="font-bold text-slate-200">Clasificación</h3>
+                <div class="space-y-2 text-xs">
+                    <div class="flex justify-between py-1.5 border-b border-slate-700/50 font-semibold text-slate-400">
+                        <span>Puesto / Usuario</span>
+                        <span>Puntos</span>
+                    </div>
+                    <div class="flex justify-between items-center py-1">
+                        <span class="text-slate-300">1. Marta_Demo <span class="text-[10px] bg-slate-700 px-1.5 py-0.5 rounded text-emerald-400">demo</span></span>
+                        <span class="font-bold text-emerald-400">42</span>
+                    </div>
+                    <div class="flex justify-between items-center py-1">
+                        <span class="text-slate-300">2. Álex_Demo <span class="text-[10px] bg-slate-700 px-1.5 py-0.5 rounded text-emerald-400">demo</span></span>
+                        <span class="font-bold text-emerald-400">37</span>
+                    </div>
+                    <div class="flex justify-between items-center py-1">
+                        <span class="text-slate-300">3. Lucía_Demo <span class="text-[10px] bg-slate-700 px-1.5 py-0.5 rounded text-emerald-400">demo</span></span>
+                        <span class="font-bold text-emerald-400">31</span>
+                    </div>
+                    <div class="flex justify-between items-center py-1 font-bold text-emerald-400 bg-emerald-500/10 px-2 rounded">
+                        <span>6. Tú</span>
+                        <span>0</span>
+                    </div>
+                </div>
+                <div class="pt-2">
+                    <a href="clasificacion.html" class="text-xs text-emerald-400 hover:underline font-medium">Ver clasificación completa →</a>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Script del carrusel -->
+    <script>
+    (function () {
+        const h = document.getElementById('hero'), s = [...h.querySelectorAll('.slide')], d = h.querySelector('.puntos');
+        let i = 0, t;
+
+        s.forEach((x, n) => {
+            const im = x.querySelector('img');
+            const rutas = im.dataset.rutas.split('|');
+            let k = 0;
+            // Prueba cada ruta; si ninguna existe, usa un degradado y avisa en la consola (F12)
+            const probar = () => {
+                if (k >= rutas.length) {
+                    console.warn('Foto no encontrada. Probé estas rutas:', rutas);
+                    im.remove();
+                    x.style.background = x.dataset.fondo;
+                    return;
+                }
+                im.src = rutas[k++];
+            };
+            im.addEventListener('error', probar);
+            probar();
+
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.setAttribute('aria-label', 'Ir a la imagen ' + (n + 1));
+            b.onclick = () => ir(n);
+            d.append(b);
+        });
+
+        function ir(n) {
+            i = (n + s.length) % s.length;
+            s.forEach((x, k) => { x.classList.toggle('on', k === i); x.setAttribute('aria-hidden', k !== i); });
+            [...d.children].forEach((b, k) => b.setAttribute('aria-current', k === i));
+        }
+
+        h.querySelector('.ant').onclick = () => ir(i - 1);
+        h.querySelector('.sig').onclick = () => ir(i + 1);
+
+        const play = () => { if (!matchMedia('(prefers-reduced-motion: reduce)').matches) t = setInterval(() => ir(i + 1), 6000); };
+        const stop = () => clearInterval(t);
+        h.addEventListener('mouseenter', stop); h.addEventListener('mouseleave', play);
+        h.addEventListener('focusin', stop); h.addEventListener('focusout', play);
+        ir(0); play();
+    })();
+    </script>
+</body>
+</html>

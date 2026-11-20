@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juegos | FUTCTRL</title>
+    <meta name="description" content="Minijuegos de FUTCTRL: test de ideología futbolística y simulador de carrera.">
+    <meta name="theme-color" content="#0f172a">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+
+    <header class="border-b border-slate-800 bg-slate-950/70 sticky top-0 z-50 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="text-2xl font-black text-emerald-400 tracking-wider">FUTCTRL</a>
+                <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-medium">BETA 1.0</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="index.html" class="text-slate-300 hover:text-emerald-300 transition">Inicio</a>
+                <a href="carrera.html" class="text-slate-300 hover:text-emerald-300 transition">Modo Carrera</a>
+                <a href="partidos.html" class="text-slate-300 hover:text-emerald-300 transition">Partidos</a>
+                <a href="predicciones.html" class="text-slate-300 hover:text-emerald-300 transition">Predicciones</a>
+                <a href="entrenador.html" class="text-slate-300 hover:text-emerald-300 transition">Entrenador</a>
+                <a href="retos.html" class="text-slate-300 hover:text-emerald-300 transition">Retos</a>
+                <a href="clasificacion.html" class="text-slate-300 hover:text-emerald-300 transition">Clasificación</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="perfil.html" class="text-sm text-slate-300 hover:text-white transition">Perfil</a>
+                <a href="admin.html" class="text-sm text-slate-300 hover:text-white transition">Admin</a>
+                <a href="login.html" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-emerald-900/40">Entrar</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-10 space-y-8">
+        <div>
+            <h1 class="text-3xl font-black">Juegos</h1>
+            <p class="text-slate-400 text-sm mt-1">Partidas rápidas con jugadores y clubes ficticios (datos de demostración).</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Tarjeta 1: Test de ideología -->
+            <article class="relative overflow-hidden rounded-2xl border border-slate-700/60 min-h-[320px] flex flex-col justify-end p-6 bg-gradient-to-br from-teal-700 via-slate-900 to-amber-800">
+                <span class="self-start text-[11px] font-bold bg-slate-950/60 text-slate-200 px-2.5 py-1 rounded-full mb-3">5 min</span>
+                <h2 class="text-2xl font-black text-white">Test de ideología futbolística</h2>
+                <p class="text-slate-300 text-sm mt-2 mb-5">Responde dilemas de fútbol y descubre qué estilo de entrenador representa tu forma de ver el juego.</p>
+                <button type="button" disabled aria-disabled="true" class="self-start bg-slate-200/20 text-slate-300 font-semibold px-5 py-2.5 rounded-full text-sm cursor-not-allowed">
+                    Próximamente
+                </button>
+            </article>
+
+            <!-- Tarjeta 2: Carrera -->
+            <article class="relative overflow-hidden rounded-2xl border border-slate-700/60 min-h-[320px] flex flex-col justify-end p-6 bg-gradient-to-br from-violet-800 via-slate-900 to-fuchsia-900">
+                <span class="self-start text-[11px] font-bold bg-slate-950/60 text-slate-200 px-2.5 py-1 rounded-full mb-3">2-10 min</span>
+                <h2 class="text-2xl font-black text-white">Conviértete en leyenda</h2>
+                <p class="text-slate-300 text-sm mt-2 mb-5">Toma decisiones, asume consecuencias y construye la carrera de un futbolista paso a paso.</p>
+                <a href="carrera.html" class="self-start bg-white hover:bg-slate-200 text-slate-900 font-semibold px-5 py-2.5 rounded-full text-sm transition">
+                    Jugar ahora &rarr;
+                </a>
+            </article>
+
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modo Carrera | FUTCTRL</title>
+    <meta name="description" content="Vive la carrera completa de un futbolista, de los 16 años al retiro. Simulación táctica interactiva.">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+
+<!-- Navbar Superior Integrado con el proyecto -->
+<header class="border-b border-slate-800 bg-slate-950/70 sticky top-0 z-50 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <a href="index.html" class="text-2xl font-black text-emerald-400 tracking-wider">FUTCTRL</a>
+            <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-medium">BETA 1.0</span>
+        </div>
+        <nav class="hidden md:flex space-x-6 text-sm font-medium">
+            <a href="index.html" class="text-slate-300 hover:text-emerald-300 transition">Inicio</a>
+            <a href="carrera.html" class="text-emerald-400 font-semibold">Modo Carrera</a>
+            <a href="partidos.html" class="text-slate-300 hover:text-emerald-300 transition">Partidos</a>
+            <a href="predicciones.html" class="text-slate-300 hover:text-emerald-300 transition">Predicciones</a>
+            <a href="entrenador.html" class="text-slate-300 hover:text-emerald-300 transition">Entrenador</a>
+            <a href="retos.html" class="text-slate-300 hover:text-emerald-300 transition">Retos</a>
+            <a href="clasificacion.html" class="text-slate-300 hover:text-emerald-300 transition">Clasificación</a>
+        </nav>
+        <div class="flex items-center space-x-4">
+            <a href="perfil.html" class="text-sm text-slate-300 hover:text-white transition">Perfil</a>
+            <a href="admin.html" class="text-sm text-slate-300 hover:text-white transition">Admin</a>
+            <a href="login.html" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-emerald-900/40">Entrar</a>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 py-8 space-y-6">
+
+    <!-- 1. INICIO Y CREACIÓN DEL JUGADOR -->
+    <section id="s-inicio" class="space-y-6">
+        <div class="rounded-3xl border border-slate-700/60 p-8 md:p-10 min-h-[300px] flex flex-col justify-end bg-gradient-to-br from-violet-800 via-slate-900 to-fuchsia-900 shadow-2xl">
+            <span class="self-start text-[11px] font-bold bg-slate-950/60 text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-full mb-3">Simulador Rápido (2-5 min)</span>
+            <h1 class="text-3xl md:text-4xl font-black text-white">Conviértete en Leyenda</h1>
+            <p class="text-slate-300 mt-2 max-w-xl text-sm md:text-base">Vive la carrera completa de un futbolista, desde los 16 años hasta el retiro. Toma decisiones clave, arriesga y escribe tu propia historia en FUTCTRL.</p>
+            <div class="flex flex-wrap gap-3 mt-6">
+                <button type="button" onclick="mostrarForm(false)" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-6 py-3 rounded-xl text-sm transition shadow-lg shadow-emerald-900/40">Jugar ahora &rarr;</button>
+                <button type="button" onclick="mostrarForm(true)" class="bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-white font-semibold px-6 py-3 rounded-xl text-sm transition">Carrera diaria (misma suerte para todos)</button>
+            </div>
+        </div>
+
+        <div id="f-jugador" class="hidden bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 space-y-6 shadow-xl">
+            <h2 class="text-lg font-bold text-white">Crea a tu jugador</h2>
+            
+            <!-- CAMISETA INTERACTIVA INTEGRADA -->
+            <div class="flex flex-col items-center justify-center bg-slate-950/50 p-4 rounded-xl border border-slate-700/50">
+                <div class="relative w-36 h-44 bg-gradient-to-b from-yellow-400 to-yellow-500 rounded-2xl shadow-xl flex flex-col items-center justify-center p-3 border-2 border-yellow-300/40 select-none">
+                    <span id="prev-nombre" class="text-slate-950 font-black text-sm tracking-widest uppercase truncate max-w-[120px]">TORRES</span>
+                    <span id="prev-num" class="text-slate-950 font-black text-5xl tracking-tighter mt-1">10</span>
+                </div>
+                <span class="text-[10px] text-slate-400 mt-2 uppercase tracking-wider font-semibold">Vista previa</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <label class="space-y-1 block"><span class="text-slate-400">Nombre / Apellido</span>
+                    <input id="i-nombre" maxlength="15" value="TORRES" oninput="actualizarCamiseta()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white uppercase font-bold focus:border-emerald-500 outline-none"></label>
+                <label class="space-y-1 block"><span class="text-slate-400">Número de camiseta (1-99)</span>
+                    <input id="i-num" type="number" min="1" max="99" value="10" oninput="actualizarCamiseta()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white font-bold focus:border-emerald-500 outline-none"></label>
+                <label class="space-y-1 block"><span class="text-slate-400">Pie dominante</span>
+                    <select id="i-pie" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:border-emerald-500 outline-none"><option>Derecho</option><option>Izquierdo</option><option>Ambidiestro</option></select></label>
+                <label class="space-y-1 block"><span class="text-slate-400">País de origen</span>
+                    <select id="i-pais" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:border-emerald-500 outline-none"></select></label>
+                <label class="space-y-1 block"><span class="text-slate-400">Posición</span>
+                    <select id="i-pos" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:border-emerald-500 outline-none"><option>Portero</option><option>Defensor</option><option>Mediocampista</option><option selected>Delantero</option></select></label>
+                <label class="space-y-1 block"><span class="text-slate-400">Semilla (opcional, para repetir suerte)</span>
+                    <input id="i-seed" maxlength="20" placeholder="Déjalo vacío para una al azar" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:border-emerald-500 outline-none"></label>
+            </div>
+            <button type="button" onclick="procesarCreacion()" class="mt-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-2.5 rounded-lg text-sm transition shadow-md">Elegir club inicial &rarr;</button>
+        </div>
+
+        <div id="s-club" class="hidden space-y-3">
+            <h2 class="text-lg font-bold text-white">Elige dónde empiezas (16 años)</h2>
+            <p class="text-slate-400 text-xs">Dos canteras de tu país y una opción aleatoria del mundo.</p>
+            <div id="opc-club" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+        </div>
+    </section>
+
+    <!-- 2. JUEGO -->
+    <section id="s-juego" class="hidden space-y-6">
+        <div id="panel" class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-slate-900/80 p-4 rounded-xl border border-slate-700/80 text-center shadow-lg"></div>
+        <div id="evento" class="bg-slate-800/60 border border-emerald-500/30 rounded-2xl p-6 space-y-3 shadow-xl"></div>
+        <div id="resultado" class="hidden bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 space-y-3 shadow-xl" aria-live="polite"></div>
+        <div>
+            <h3 class="text-xs font-bold text-slate-400 uppercase mb-2">Línea de tiempo de tu carrera</h3>
+            <div id="linea" class="bg-slate-900/40 p-4 rounded-xl text-xs text-slate-300 space-y-1 max-h-48 overflow-y-auto border border-slate-800"></div>
+        </div>
+    </section>
+
+    <!-- 3. RESUMEN FINAL -->
+    <section id="s-final" class="hidden space-y-6"></section>
+
+</main>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const cl = (x, a, b) => Math.max(a, Math.min(b, x));
+const fmt = v => (v >= 10 ? String(Math.round(v)) : v.toFixed(1).replace('.', ',')) + ' M';
+
+const PAISES = "Venezuela|SA|2|San Felipe,Barquisimeto,Maracay;Argentina|SA|5|Rosario,Córdoba,Mendoza;Brasil|SA|5|Curitiba,Recife,Salvador;Colombia|SA|4|Cali,Barranquilla,Bucaramanga;Uruguay|SA|4|Salto,Paysandú,Maldonado;Chile|SA|3|Valparaíso,Temuco,Antofagasta;Perú|SA|2|Arequipa,Trujillo,Cusco;Ecuador|SA|3|Guayaquil,Cuenca,Loja;México|NA|4|Guadalajara,Monterrey,Puebla;España|EU|5|Sevilla,Valencia,Bilbao;Inglaterra|EU|5|Leeds,Bristol,Norwich;Francia|EU|5|Lyon,Nantes,Lille;Alemania|EU|4|Hamburgo,Leipzig,Stuttgart;Italia|EU|4|Turín,Bolonia,Génova;Portugal|EU|4|Oporto,Braga,Faro"
+    .split(';').map(s => { const [n, r, l, c] = s.split('|'); return { n, r, l: +l, c: c.split(',') }; });
+const ELITE = "Royal Capital FC|España|5;Atlético Mediterráneo|España|4;Union Bavaria|Alemania|5;Rhein United|Alemania|4;London Crown FC|Inglaterra|5;Northern Rovers|Inglaterra|4;Lombardia FC|Italia|4;Capitolina FC|Italia|4;Paris Étoile|Francia|5;Lisboa Mar|Portugal|4;Paulista FC|Brasil|5;Carioca Mar|Brasil|4;Plata Juniors|Argentina|5;Porteño Atlético|Argentina|4;Charrúa SC|Uruguay|3;Cafeteros FC|Colombia|3;Andes FC|Chile|3;Aztecas CF|México|3".split(';');
+const reg = p => PAISES.find(x => x.n === p).r;
+const POOL = [];
+PAISES.forEach(p => p.c.forEach((c, i) => POOL.push({ n: ['Cantera ', 'Unión ', 'Racing '][i] + c, p: p.n, t: i + 1, r: p.r })));
+ELITE.forEach(s => { const [n, p, t] = s.split('|'); POOL.push({ n, p, t: +t, r: reg(p) }); });
+const NIVEL = ['Cantera', 'Club formativo', 'Club medio', 'Club grande', 'Élite'];
+const RATE = { Portero: [0, 0], Defensor: [.03, .06], Mediocampista: [.14, .2], Delantero: [.45, .18] };
+const FICH = [18, 21, 24, 27, 30, 33];
+
+const EVENTOS = [
+ { t: 'Entrenamiento', d: 'El preparador físico te propone un plan de trabajo.', x: 'Más carga mejora el nivel, pero acumula fatiga.', o: [
+   ['Entrenar extra', '+nivel, riesgo de sobrecarga', .7, [2.2, 0, 5], [-.5, -5, 0], 'Tu esfuerzo extra se nota en el campo.', 'Te sobrecargas y rindes por debajo.'],
+   ['Plan normal', 'Sin sorpresas', .9, [1, 0, 0], [0, 0, 0], 'Temporada de trabajo constante.', 'Una temporada sin avances.'],
+   ['Descansar', 'Más ánimo, menos progreso', .8, [.4, 10, 0], [0, 0, 0], 'Llegas fresco y motivado.', 'El descanso no te cunde.']] },
+ { t: 'Dieta y hábitos', d: 'Tu cuerpo es tu herramienta de trabajo.', x: 'Los hábitos pesan a largo plazo.', o: [
+   ['Contratar nutricionista', 'Inversión en tu cuerpo', .85, [1.5, 3, 3], [.2, 0, 0], 'Tu físico mejora notablemente.', 'Los cambios tardan en notarse.'],
+   ['Seguir como siempre', 'Sin cambios', .9, [.2, 0, 0], [0, 0, 0], 'Todo sigue igual.', 'Notas el cansancio.'],
+   ['Salir de fiesta', 'Diversión o escándalo', .35, [0, 15, 0], [-2, -15, -8], 'Te desconectas y vuelves con energía.', 'Las fotos llegan a la prensa y cae tu imagen.']] },
+ { t: 'Vacaciones', d: 'Termina la temporada y llegan las vacaciones.', x: 'El descanso recarga pilas.', o: [
+   ['Vacaciones largas', 'Mucha moral, ritmo perdido', .6, [-.3, 20, 0], [-1.5, 10, 0], 'Recargas pilas por completo.', 'Pierdes algo de forma física.'],
+   ['Vacaciones cortas', 'Equilibrio', .9, [.2, 8, 0], [0, 3, 0], 'Descanso justo y vuelves enchufado.', 'Poco descanso, algo de cansancio.'],
+   ['Entrenar en vacaciones', 'Nivel arriba, moral abajo', .6, [1.5, -5, 0], [0, -15, 0], 'Llegas a la pretemporada en plena forma.', 'Te quemas mentalmente.']] },
+ { t: 'Presión de la prensa', d: 'Un titular polémico sobre ti corre por las redes.', x: 'En las crisis, el tono importa.', o: [
+   ['Responder en redes', 'Alto riesgo, alta recompensa', .4, [0, 5, 10], [-1, -15, -10], 'Tu respuesta se vuelve viral para bien.', 'La respuesta empeora la polémica.'],
+   ['Ignorarlo', 'Poco riesgo', .8, [0, 0, 0], [0, -8, -3], 'La polémica se apaga sola.', 'El ruido te afecta más de lo esperado.'],
+   ['Rueda de prensa', 'Explicar con calma', .7, [0, 8, 6], [0, -3, 0], 'Tu serenidad gana aplausos.', 'Tus palabras se malinterpretan.']] }
+];
+const LESION = { t: 'Lesión', d: 'Te lesionas en pleno partido. El equipo médico espera tu decisión.', x: 'Volver antes de tiempo puede empeorar.', o: [
+   ['Operación rápida', 'Recuperación corta, riesgo', .55, [-.5, 0, 0], [-3, -10, -10], 'La operación sale bien.', 'Hay complicaciones y tu nivel se resiente.'],
+   ['Rehabilitación gradual', 'La opción prudente', .8, [-1, 0, -3], [-2, -5, -5], 'Vuelves sin secuelas.', 'La recuperación es lenta.'],
+   ['Volver ya', 'Mucho riesgo', .35, [0, 5, 0], [-5, -15, -15], 'Aguantas y vuelves antes de lo previsto.', 'Recaes y la lesión se agrava.']] };
+
+let seed = '', cfg = {}, OPC = [], G = null, EV = null;
+function rnd(k) { let a = 0x9e3779b9; const s = seed + '|' + k; for (let i = 0; i < s.length; i++) a = Math.imul(a ^ s.charCodeAt(i), 2654435761); a ^= a >>> 15; a = Math.imul(a, 2246822507); a ^= a >>> 13; return (a >>> 0) / 4294967296; }
+const bench = t => [56, 64, 72, 80, 87][t - 1];
+const curva = a => a <= 18 ? 5 : a <= 21 ? 4 : a <= 24 ? 2.5 : a <= 27 ? 1 : a <= 29 ? 0 : a <= 31 ? -1 : a <= 33 ? -2 : -3;
+const multEdad = a => a <= 21 ? 1.5 : a <= 24 ? 1.25 : a <= 27 ? 1.1 : a <= 29 ? .95 : a <= 31 ? .7 : a <= 33 ? .45 : .25;
+const valor = (o, a, vm) => .5 * Math.exp(.16 * (o - 60)) * multEdad(a) * vm;
+
+function actualizarCamiseta() {
+    const nombreVal = $('i-nombre').value.trim().toUpperCase() || 'TORRES';
+    const numVal = $('i-num').value \vert{}\vert{} '10';$('prev-nombre').innerText = nombreVal;
+    $('prev-num').innerText = numVal;
+}
+
+function mostrarForm(diaria) {
+    $('f-jugador').classList.remove('hidden');
+    if (diaria) $('i-seed').value = 'diaria-' + new Date().toISOString().slice(0, 10);
+    actualizarCamiseta();
+    $('i-nombre').focus();
+}
+
+function procesarCreacion() {
+    seed = $('i-seed').value.trim() || Math.random().toString(36).slice(2, 7);
+    cfg = {
+        nombre: $('i-nombre').value.trim() || 'TORRES',
+        num: cl(parseInt($('i-num').value) || 10, 1, 99),
+        pie: $('i-pie').value,
+        pais: $('i-pais').value,
+        pos: $('i-pos').value,
+        seed
+    };
+    
+    const P = PAISES.find(p => p.n === cfg.pais);
+    const cant = P.c.map(c => POOL.find(x => x.n === 'Cantera ' + c)).sort((a, b) => rnd('c' + a.n) - rnd('c' + b.n)).slice(0, 2);
+    const lo = POOL.filter(x => x.t <= 4 && !cant.includes(x));
+    OPC = [...cant, { ...lo[Math.floor(rnd('loco') * lo.length)], loco: true }];
+
+    $('opc-club').innerHTML = OPC.map((c, i) => `<div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-5 space-y-2">
+        ${c.loco ? '<span class="text-[11px] font-bold bg-fuchsia-500/20 text-fuchsia-300 px-2 py-0.5 rounded-full">Aleatorio</span>' : '<span class="text-[11px] font-bold bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full">Cantera local</span>'}
+        <h3 class="font-bold text-white">${esc(c.n)}</h3><p class="text-xs text-slate-400">${esc(c.p)}, ${NIVEL[c.t - 1]}</p>
+        <button type="button" onclick="comenzar(${i})" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2 rounded-lg text-sm transition">Empezar aquí</button></div>`).join('');
+    
+    $('s-club').classList.remove('hidden');$('s-club').scrollIntoView({ behavior: 'smooth' });
+}
+
+function comenzar(i) {
+    const c = OPC[i];
+    G = { ...cfg, age: 16, club: c, ovr: 50 + rnd('ini') * 9 + (c.t - 1) * 2, pot: 72 + rnd('pot') * 22 + (rnd('joya') < .06 ? 5 : 0), moral: 60, vm: 1, les: false, loan: false,
+          retAge: 35 + Math.floor(rnd('ret') * 4), pj: 0, g: 0, a: 0, cs: 0, sel: 0, selG: 0, tr: {}, hist: [], log: [], maxO: 0, maxV: 0, val: 0, fin: false };
+    G.val = valor(G.ovr, 16, 1); G.maxO = G.ovr; G.maxV = G.val;
+    ['s-inicio', 'resultado'].forEach(x => $(x).classList.add('hidden'));$('s-juego').classList.remove('hidden');
+    turno();
+}
+
+function fichaje() {
+    const g = G, c = g.club, k = g.age + '';
+    const pick = (t, excl) => { const l = POOL.filter(x => x.t === t && x.n !== c.n && (!excl || x.p !== excl)); return l[Math.floor(rnd('f' + k + t) * l.length)]; };
+    const A = pick(Math.min(5, c.t + 1 + (g.ovr - bench(c.t) > 8 ? 1 : 0))), jov = g.age <= 23, B = jov ? pick(Math.max(1, c.t - 1)) : pick(c.t, c.p);
+    const mv = (x, loan) => () => { if (loan) { g.base = c; g.loan = true; } g.club = x; };
+    const fx1 = [.3, 6, 2], fx2 = [.8, -3, 8], fx3 = jov ? [.6, 4, 0] : [0, 0, 3];
+    return { t: 'Mercado de fichajes', d: `Con ${g.age} años y un nivel de ${Math.round(g.ovr)}, llegan ofertas.`, x: 'Un club grande da prestigio pero más competencia.', o: [
+        ['Renovar con ' + c.n, 'Minutos asegurados', 1, fx1, fx1, 'Renuevas y sigues como pieza clave.', '', () => { }],
+        ['Fichar por ' + A.n + ' (' + A.p + ')', 'Más prestigio', 1, fx2, fx2, 'Das el salto a un club mayor.', '', mv(A)],
+        [jov ? 'Cesión a ' + B.n : 'Cambio de aires: ' + B.n, 'Nueva etapa', 1, fx3, fx3, 'Nueva etapa profesional.', '', mv(B, jov)]] };
+}
+
+function turno() {
+    const a = G.age, k = a + '';
+    EV = FICH.includes(a) ? fichaje() : rnd('l' + k) < .1 ? LESION : EVENTOS[Math.floor(rnd('e' + k) * EVENTOS.length)];
+    panel();
+    if (!EV) { cerrar([0, 0, 0], 'Temporada tranquila.', 'Sin decisión'); return; }
+    $('resultado').classList.add('hidden'); 
+    const e = $('evento'); 
+    e.classList.remove('hidden');
+    e.innerHTML = `<div class="flex items-center justify-between"><span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Temporada ${a - 15}, ${a} años</span><span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded-md">${esc(G.club.n)}</span></div>
+        <h2 class="text-lg font-bold text-white">${esc(EV.t)}</h2><p class="text-slate-300 text-sm">${esc(EV.d)}</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3">${EV.o.map((o, i) => `<button type="button" onclick="elegir(${i})" class="p-4 bg-slate-800 hover:bg-emerald-600/30 border border-slate-700 hover:border-emerald-500 rounded-xl text-left transition group"><span class="font-bold text-sm text-white group-hover:text-emerald-300 block">${esc(o[0])}</span><span class="text-xs text-slate-400 block mt-1">${esc(o[1])}</span></button>`).join('')}</div>`;
+}
+
+function elegir(i) {
+    const o = EV.o[i], ok = rnd('o' + G.age) < o[2];
+    if (o[7]) o[7]();
+    if (EV === LESION) G.les = true;
+    cerrar(ok ? o[3] : o[4], ok ? o[5] : o[6], o[0]);
+}
+
+function cerrar(fx, msg, dec) {
+    const g = G, a = g.age, k = a + '', c = g.club, o0 = g.ovr, T = [];
+    const add = (n, grande) => { g.tr[n] = (g.tr[n] || 0) + 1; T.push(n); };
+    let d = curva(a) + fx[0] + (a < 22 ? .3 * (c.t - 1) : 0) + (g.loan ? 1 : 0) + rnd('v' + k) * 2 - .7 - (g.les ? 1.5 : 0);
+    if (d > 0) d *= cl((g.pot - g.ovr) / 8, .15, 1);
+    g.ovr = cl(g.ovr + d, 40, 99); g.moral = cl(g.moral + fx[1], 0, 100); g.vm = cl(g.vm * (1 + fx[2] / 100), .6, 1.8);
+    const mf = cl(.5 + (g.ovr - bench(c.t)) / 28 + (g.loan ? .25 : 0), .15, 1) * (g.les ? .6 : 1);
+    const pj = Math.round(50 * mf * (.9 + .2 * rnd('pj' + k))), r = RATE[g.pos], fg = Math.max(.2, (g.ovr - 45) / 35);
+    const gl = Math.round(pj * r[0] * fg * (.8 + .4 * rnd('g' + k))), as = Math.round(pj * r[1] * (.8 + .4 * rnd('a' + k)));
+    const cs = g.pos === 'Portero' ? Math.round(pj * .3 * g.ovr / 80) : 0;
+    const bo = g.ovr > 80 ? (g.ovr - 80) / 400 : 0, q = .5 + .5 * mf;
+    if (rnd('lg' + k) < [.01, .03, .08, .16, .30][c.t - 1] * q + bo) add('Liga');
+    if (c.r === 'EU' && c.t >= 4 && rnd('ch' + k) < [.05, .14][c.t - 4] * q + bo / 1.5) add('Champions League', 1);
+    const P = PAISES.find(p => p.n === g.pais), yr = 2026 + a - 16, call = a >= 18 && g.ovr >= 62 + 4 * P.l;
+    let caps = 0;
+    if (call) {
+        caps = Math.round(4 + rnd('cp' + k) * 4);
+        if (yr % 4 === 2) { caps += 5; if (rnd('mu' + k) < .05) add('Mundial', 1); }
+    }
+    const cg = Math.round(caps * r[0] * .8 * fg);
+    if (g.ovr >= 88 && a >= 20 && rnd('bo' + k) < .5) add('Balón de Oro');
+    g.vm = cl(g.vm * (1 + .03 * T.length), .6, 1.8); g.val = valor(g.ovr, a, g.vm);
+    g.pj += pj; g.g += gl; g.a += as; g.cs += cs; g.sel += caps; g.selG += cg;
+    g.maxO = Math.max(g.maxO, g.ovr); g.maxV = Math.max(g.maxV, g.val);
+    g.hist.push({ a, o: g.ovr, v: g.val });
+    const stats = g.pos === 'Portero' ? `${pj} PJ, ${cs} porterías a cero` : `${pj} PJ, ${gl} G, ${as} A`;
+    g.log.unshift(`<p><b>${a}</b> ${esc(c.n)}: nivel ${Math.round(g.ovr)}, ${fmt(g.val)}, ${stats}${T.length ? ' <span class="text-amber-400">' + T.join(', ') + '</span>' : ''}</p>`);
+    if (g.loan) { g.club = g.base; g.loan = false; }
+    g.les = false; g.fin = a >= g.retAge || (a >= 33 && g.ovr < 60);
+    const dO = Math.round(g.ovr) - Math.round(o0), flecha = n => n > 0 ? `<span class="text-emerald-400">+${n}</span>` : n < 0 ? `<span class="text-red-400">${n}</span>` : '0';
+    $('evento').classList.add('hidden'); 
+    const e = $('resultado'); 
+    e.classList.remove('hidden');
+    e.innerHTML = `<p class="text-xs font-bold text-slate-400 uppercase">${esc(dec)}</p><p class="text-slate-100 font-medium">${esc(msg)}</p>
+        <p class="text-sm text-slate-300">Nivel ${Math.round(g.ovr)} (${flecha(dO)}), valor ${fmt(g.val)}, ${stats}.</p>
+        ${T.length ? `<p class="text-amber-400 font-semibold">Logros: ${T.join(', ')}</p>` : ''}
+        <button type="button" onclick="siguientePaso()" class="mt-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition">${g.fin ? 'Ver el resumen de mi carrera' : 'Siguiente temporada &rarr;'}</button>`;
+    panel(); 
+    $('linea').innerHTML = g.log.join('');
+}
+
+function siguientePaso() {
+    if (G.fin) final(); 
+    else { G.age++; turno(); }
+}
+
+function panel() {
+    const g = G, c = g.club;
+    const cel = (t, v, cls) => `<div><span class="text-xs text-slate-400 block">${t}</span><span class="font-bold text-sm ${cls}">${v}</span></div>`;
+    $('panel').innerHTML = cel('Jugador', esc(g.nombre) + ' #' + g.num, 'text-emerald-400') + cel('Edad', g.age + ' años', 'text-white') +
+        cel('Club', esc(c.n), 'text-amber-400') + cel('Nivel (OVR)', Math.round(g.ovr) + ' / ' + fmt(g.val), 'text-emerald-400');
+}
+
+function final() {
+    const g = G, P = Object.entries(g.tr).map(([k, v]) => `<li>${v}× ${esc(k)}</li>`).join('') || '<li class="text-slate-400">Sin títulos</li>';
+    ['s-juego'].forEach(x => $(x).classList.add('hidden')); 
+    const s = $('s-final'); 
+    s.classList.remove('hidden');
+    s.innerHTML = `<div class="rounded-3xl border border-slate-700/60 p-8 bg-gradient-to-br from-violet-800 via-slate-900 to-emerald-900 shadow-xl">
+        <p class="text-xs font-bold text-emerald-300 uppercase">Retiro a los ${g.age} años</p><h1 class="text-3xl font-black text-white">${esc(g.nombre)} #${g.num}</h1>
+        <p class="text-amber-400 font-bold text-xl">Carrera Finalizada</p><p class="text-slate-300 text-sm">${g.pos}, ${esc(g.pais)}. Nivel máximo ${Math.round(g.maxO)}.</p></div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">${[['Partidos', g.pj], [g.pos === 'Portero' ? 'Porterías a cero' : 'Goles', g.pos === 'Portero' ? g.cs : g.g], ['Asistencias', g.a], ['Selección', g.sel + ' PJ']].map(a => `<div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-4"><span class="text-xs text-slate-400 block">${a[0]}</span><span class="font-black text-xl text-white">${a[1]}</span></div>`).join('')}</div>
+        <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-5"><h2 class="font-bold mb-2 text-white">Palmarés</h2><ul class="text-sm space-y-1">${P}</ul></div>
+        <button type="button" onclick="location.reload()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-sm transition">🔄 Jugar otra carrera</button>`;
+}
+
+// Inicializar selectores al cargar la página
+window.addEventListener('DOMContentLoaded', () => {
+    const sel = $('i-pais');
+    if (sel) {
+        sel.innerHTML = PAISES.map(p => `<option>${p.n}</option>`).join('');
+        sel.value = 'Venezuela';
+    }
+});
+</script>
+</body>
+</html>

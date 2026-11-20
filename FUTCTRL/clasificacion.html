@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificación General | FUTCTRL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+    
+    <!-- Navbar Superior -->
+    <header class="border-b border-slate-800 bg-slate-950/70 sticky top-0 z-50 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="text-2xl font-black text-emerald-400 tracking-wider">FUTCTRL</a>
+                <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-medium">BETA 1.0</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="index.html" class="text-slate-300 hover:text-emerald-300 transition">Inicio</a>
+                <a href="carrera.html" class="text-slate-300 hover:text-emerald-300 transition">Modo Carrera</a>
+                <a href="partidos.html" class="text-slate-300 hover:text-emerald-300 transition">Partidos</a>
+                <a href="predicciones.html" class="text-slate-300 hover:text-emerald-300 transition">Predicciones</a>
+                <a href="entrenador.html" class="text-slate-300 hover:text-emerald-300 transition">Entrenador</a>
+                <a href="retos.html" class="text-slate-300 hover:text-emerald-300 transition">Retos</a>
+                <a href="clasificacion.html" class="text-slate-300 hover:text-emerald-300 transition">Clasificación</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="perfil.html" class="text-sm text-slate-300 hover:text-white transition">Perfil</a>
+                <a href="admin.html" class="text-sm text-slate-300 hover:text-white transition">Admin</a>
+                <a href="login.html" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-emerald-900/40">Entrar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+        
+        <!-- Cabecera -->
+        <div class="bg-slate-800/40 border border-slate-700/60 p-6 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-black text-white flex items-center gap-2">🏆 Tabla de Clasificación</h1>
+                <p class="text-slate-400 text-sm mt-1">Suma puntos acertando pronósticos y resolviendo retos tácticos.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <input type="text" id="search-input" onkeyup="filterLeaderboard()" placeholder="🔍 Buscar usuario..." class="bg-slate-900 border border-slate-700 text-xs text-slate-200 px-3 py-2 rounded-xl focus:outline-none focus:border-emerald-400">
+            </div>
+        </div>
+
+        <!-- Filtros de Período Seleccionables -->
+        <div class="flex justify-between items-center bg-slate-800/40 p-3 rounded-xl border border-slate-700/60">
+            <div class="flex gap-2">
+                <button onclick="switchPeriod('general', this)" class="period-btn bg-emerald-600 text-white px-4 py-1.5 rounded-lg text-xs font-bold transition">General</button>
+                <button onclick="switchPeriod('monthly', this)" class="period-btn bg-slate-800 text-slate-300 hover:bg-slate-700 px-4 py-1.5 rounded-lg text-xs font-bold transition border border-slate-700">Mensual</button>
+                <button onclick="switchPeriod('weekly', this)" class="period-btn bg-slate-800 text-slate-300 hover:bg-slate-700 px-4 py-1.5 rounded-lg text-xs font-bold transition border border-slate-700">Semanal</button>
+            </div>
+            <span class="text-xs text-slate-400 hidden sm:block">Actualizado en tiempo real</span>
+        </div>
+
+        <!-- Tabla de Posiciones -->
+        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-950/80 text-slate-400 text-xs font-semibold uppercase tracking-wider border-b border-slate-700/60">
+                            <th class="p-4">Puesto</th>
+                            <th class="p-4">Usuario</th>
+                            <th class="p-4 text-center">Predicciones</th>
+                            <th class="p-4 text-center">Táctica</th>
+                            <th class="p-4 text-center">Análisis</th>
+                            <th class="p-4 text-right">Puntos Totales</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-body" class="divide-y divide-slate-700/50 text-xs md:text-sm">
+                        <!-- Carga dinámica con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const leaderboardData = {
+            general: [
+                { pos: 1, name: "Marta_Demo", badge: "demo", pred: 20, tac: 15, ana: 7, total: 42, isUser: false },
+                { pos: 2, name: "Álex_Demo", badge: "demo", pred: 18, tac: 12, ana: 7, total: 37, isUser: false },
+                { pos: 3, name: "Lucía_Demo", badge: "demo", pred: 15, tac: 10, ana: 6, total: 31, isUser: false },
+                { pos: 4, name: "Hugo_Demo", badge: "demo", pred: 12, tac: 8, ana: 4, total: 24, isUser: false },
+                { pos: 5, name: "Sara_Demo", badge: "demo", pred: 8, tac: 4, ana: 0, total: 12, isUser: false },
+                { pos: 6, name: "Tú", badge: "tú", pred: 0, tac: 0, ana: 0, total: 0, isUser: true }
+            ],
+            monthly: [
+                { pos: 1, name: "Álex_Demo", badge: "demo", pred: 10, tac: 8, ana: 4, total: 22, isUser: false },
+                { pos: 2, name: "Marta_Demo", badge: "demo", pred: 9, tac: 7, ana: 3, total: 19, isUser: false },
+                { pos: 3, name: "Tú", badge: "tú", pred: 0, tac: 0, ana: 0, total: 0, isUser: true }
+            ],
+            weekly: [
+                { pos: 1, name: "Marta_Demo", badge: "demo", pred: 5, tac: 3, ana: 2, total: 10, isUser: false },
+                { pos: 2, name: "Tú", badge: "tú", pred: 0, tac: 0, ana: 0, total: 0, isUser: true }
+            ]
+        };
+
+        let currentPeriod = 'general';
+
+        function renderLeaderboard(filterText = "") {
+            const tbody = document.getElementById('leaderboard-body');
+            tbody.innerHTML = '';
+
+            const list = leaderboardData[currentPeriod].filter(item => 
+                item.name.toLowerCase().includes(filterText.toLowerCase())
+            );
+
+            list.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = item.isUser 
+                    ? "bg-emerald-500/15 font-bold border-l-4 border-emerald-400" 
+                    : "hover:bg-slate-800/80 transition";
+
+                tr.innerHTML = `
+                    <td class="p-4 font-black ${item.pos <= 3 ? 'text-amber-400' : 'text-slate-400'}">#${item.pos}</td>
+                    <td class="p-4 flex items-center gap-2">
+                        <span class="text-slate-200 font-bold">${item.name}</span>
+                        ${item.isUser ? '<span class="text-[9px] bg-emerald-500/30 text-emerald-300 border border-emerald-400/40 px-2 py-0.5 rounded-full uppercase">TÚ</span>' : '<span class="text-[9px] bg-slate-700 text-slate-300 px-1.5 py-0.5 rounded">demo</span>'}
+                    </td>
+                    <td class="p-4 text-center text-slate-300">${item.pred} pts</td>
+                    <td class="p-4 text-center text-slate-300">${item.tac} pts</td>
+                    <td class="p-4 text-center text-slate-300">${item.ana} pts</td>
+                    <td class="p-4 text-right font-black ${item.isUser ? 'text-emerald-400 text-base' : 'text-slate-100'}">${item.total} pts</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function switchPeriod(period, btn) {
+            currentPeriod = period;
+            document.querySelectorAll('.period-btn').forEach(b => {
+                b.classList.remove('bg-emerald-600', 'text-white');
+                b.classList.add('bg-slate-800', 'text-slate-300');
+            });
+            btn.classList.remove('bg-slate-800', 'text-slate-300');
+            btn.classList.add('bg-emerald-600', 'text-white');
+            renderLeaderboard();
+        }
+
+        function filterLeaderboard() {
+            const query = document.getElementById('search-input').value;
+            renderLeaderboard(query);
+        }
+
+        window.onload = () => renderLeaderboard();
+    </script>
+</body>
+</html>

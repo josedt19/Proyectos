@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detalle del partido | FUTCTRL</title>
+  <meta name="description" content="Predicción, alineación táctica y retos de un partido en un solo lugar.">
+  <meta name="theme-color" content="#0a111f">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Detalle del partido | FUTCTRL">
+  <meta property="og:description" content="Predicción, alineación táctica y retos de un partido en un solo lugar.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="FUTCTRL.css">
+</head>
+<body data-page="partido">
+<div id="app">
+  <a class="skip" href="#main">Saltar al contenido</a>
+  <div class="app">
+    <nav class="side" aria-label="Principal">
+      <a class="brand" href="index.html">Match<b>Mind</b></a>
+      <a href="index.html">Inicio</a>
+      <a href="partidos.html" aria-current="page">Partidos</a>
+      <a href="predicciones.html" class="sec">Predicciones</a>
+      <a href="entrenador.html">Entrenador</a>
+      <a href="retos.html">Retos</a>
+      <a href="clasificacion.html">Clasificación</a>
+    </nav>
+    <div>
+      <header class="border-b border-slate-800 bg-slate-950/70 sticky top-0 z-50 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="text-2xl font-black text-emerald-400 tracking-wider">FUTCTRL</a>
+                <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-medium">BETA 1.0</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="index.html" class="text-slate-300 hover:text-emerald-300 transition">Inicio</a>
+                <a href="carrera.html" class="text-slate-300 hover:text-emerald-300 transition">Modo Carrera</a>
+                <a href="partidos.html" class="text-slate-300 hover:text-emerald-300 transition">Partidos</a>
+                <a href="predicciones.html" class="text-slate-300 hover:text-emerald-300 transition">Predicciones</a>
+                <a href="entrenador.html" class="text-slate-300 hover:text-emerald-300 transition">Entrenador</a>
+                <a href="retos.html" class="text-slate-300 hover:text-emerald-300 transition">Retos</a>
+                <a href="clasificacion.html" class="text-slate-300 hover:text-emerald-300 transition">Clasificación</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="perfil.html" class="text-sm text-slate-300 hover:text-white transition">Perfil</a>
+                <a href="admin.html" class="text-sm text-slate-300 hover:text-white transition">Admin</a>
+                <a href="login.html" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-emerald-900/40">Entrar</a>
+            </div>
+        </div>
+    </header>
+      <main id="main">
+        <h1>Detalle del partido</h1>
+        <p class="note">Versión sin JavaScript: los controles se activan cuando se carga js/app.js.</p>
+        <div class="grid">
+          <section class="card hero wide"><div class="mt"><span class="tm"><span class="crest" aria-hidden="true">RD</span>Real Demo CF</span><span class="score">vs</span><span class="tm"><span class="crest" aria-hidden="true">AF</span>Atlético Ficticio</span></div><p class="mu">Jornada 7, sáb 24 oct, 18:30 <span class="badge">Programado</span></p></section>
+          <section class="card"><h2>Tu predicción</h2><fieldset style="border:0;padding:0;margin:0" disabled><div class="mt"><label class="tm">Real Demo CF <input class="num" type="number" aria-label="Goles de Real Demo CF"></label><b>–</b><label class="tm"><input class="num" type="number" aria-label="Goles de Atlético Ficticio"> Atlético Ficticio</label></div></fieldset></section>
+          <section class="card"><h2>Tu alineación táctica</h2><ul class="ls">
+            <li><span>Real Demo CF: sin hacer</span><a class="btn" href="entrenador.html?id=1&amp;t=0">Montar once</a></li>
+            <li><span>Atlético Ficticio: sin hacer</span><a class="btn" href="entrenador.html?id=1&amp;t=1">Montar once</a></li></ul></section>
+          <section class="card"><h2>Retos del encuentro</h2><ul class="ls"><li><span>Tu equipo juega 4-4-2 y el rival presiona alto. ¿Qué ajuste ayuda a sacar el balón jugando?</span><a class="btn" href="retos.html#r1">Responder</a></li></ul></section>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>

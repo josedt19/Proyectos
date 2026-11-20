@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partidos | FUTCTRL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .carousel-item { display: none; }
+        .carousel-item.active { display: block; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+    
+    <!-- Navbar Superior -->
+    <header class="border-b border-slate-800 bg-slate-950/70 sticky top-0 z-50 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="text-2xl font-black text-emerald-400 tracking-wider">FUTCTRL</a>
+                <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-medium">BETA 1.0</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="index.html" class="text-slate-300 hover:text-emerald-300 transition">Inicio</a>
+                <a href="carrera.html" class="text-slate-300 hover:text-emerald-300 transition">Modo Carrera</a>
+                <a href="partidos.html" class="text-slate-300 hover:text-emerald-300 transition">Partidos</a>
+                <a href="predicciones.html" class="text-slate-300 hover:text-emerald-300 transition">Predicciones</a>
+                <a href="entrenador.html" class="text-slate-300 hover:text-emerald-300 transition">Entrenador</a>
+                <a href="retos.html" class="text-slate-300 hover:text-emerald-300 transition">Retos</a>
+                <a href="clasificacion.html" class="text-slate-300 hover:text-emerald-300 transition">Clasificación</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="perfil.html" class="text-sm text-slate-300 hover:text-white transition">Perfil</a>
+                <a href="admin.html" class="text-sm text-slate-300 hover:text-white transition">Admin</a>
+                <a href="login.html" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-emerald-900/40">Entrar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+        
+        <!-- CARRUSEL DE IMÁGENES (AÑADIDO SIN MODIFICAR EL RESTO) -->
+        <section class="relative w-full h-64 md:h-80 rounded-2xl overflow-hidden shadow-2xl border border-slate-800">
+            <!-- Slide 1 -->
+            <div class="carousel-item active absolute inset-0 transition-opacity duration-700 ease-in-out">
+                <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1600&auto=format&fit=crop" class="w-full h-full object-cover brightness-50" alt="Estadio iluminado">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex flex-col justify-end p-8">
+                    <span class="text-emerald-400 font-bold text-xs uppercase tracking-wider mb-1">⚽ Emoción en Directo</span>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-white">Calendario Oficial de Encuentros</h1>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item absolute inset-0 transition-opacity duration-700 ease-in-out">
+                <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1600&auto=format&fit=crop" class="w-full h-full object-cover brightness-50" alt="Balón en la cancha">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex flex-col justify-end p-8">
+                    <span class="text-emerald-400 font-bold text-xs uppercase tracking-wider mb-1">🏆 Competición Global</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-white">Sigue cada jornada y anticipa los resultados</h2>
+                </div>
+            </div>
+            
+            <button onclick="changeSlide(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-slate-900/60 hover:bg-emerald-600 text-white p-2 rounded-full transition border border-slate-700">❮</button>
+            <button onclick="changeSlide(1)" class="absolute right-4 top-1/2 -translate-y-1/2 bg-slate-900/60 hover:bg-emerald-600 text-white p-2 rounded-full transition border border-slate-700">❯</button>
+        </section>
+
+        <!-- Cabecera de la sección -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-800/40 border border-slate-700/60 p-6 rounded-2xl">
+            <div>
+                <h1 class="text-2xl font-black text-white flex items-center gap-2">⚽ Calendario y Partidos</h1>
+                <p class="text-slate-400 text-sm mt-1">Explora los encuentros disponibles, filtra por estado y haz tus pronósticos.</p>
+            </div>
+            <!-- Filtros Rápidos -->
+            <div class="flex flex-wrap gap-2">
+                <button class="bg-emerald-600 text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold transition">Todos</button>
+                <button class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition border border-slate-700">Próximos</button>
+                <button class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition border border-slate-700">En Directo 🔴</button>
+                <button class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition border border-slate-700">Finalizados</button>
+            </div>
+        </div>
+
+        <!-- Listado de Partidos en Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Partido 1: En Vivo -->
+            <div class="bg-slate-800/60 border border-emerald-500/40 rounded-xl p-5 shadow-lg relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-3 py-1 rounded-bl-lg border-l border-b border-emerald-500/30 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> EN VIVO (78')
+                </div>
+                <div class="text-xs text-slate-400 mb-4">Champions Demo</div>
+                
+                <div class="flex justify-between items-center my-4">
+                    <div class="text-center space-y-1 w-1/3">
+                        <div class="w-10 h-10 mx-auto bg-emerald-600/30 border border-emerald-500 rounded-full flex items-center justify-center font-bold text-emerald-300 text-xs">BOG</div>
+                        <div class="font-bold text-sm">Bojangles</div>
+                    </div>
+                    <div class="text-xl font-black text-emerald-400 tracking-widest bg-slate-900/80 px-3 py-1 rounded-lg border border-slate-700">
+                        2 - 1
+                    </div>
+                    <div class="text-center space-y-1 w-1/3">
+                        <div class="w-10 h-10 mx-auto bg-indigo-600/30 border border-indigo-500 rounded-full flex items-center justify-center font-bold text-indigo-300 text-xs">NOR</div>
+                        <div class="font-bold text-sm">Nordic Utd</div>
+                    </div>
+                </div>
+
+                <div class="text-xs text-slate-400 text-center mb-4">Estadio Municipal Demo</div>
+                <a href="predicciones.html" class="block text-center w-full bg-slate-700 hover:bg-slate-600 text-white font-medium py-2 rounded-lg text-xs transition">Ver Estadísticas y Ficha</a>
+            </div>
+
+            <!-- Partido 2: Próximo -->
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-5 shadow-lg hover:border-emerald-500/50 transition">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs text-slate-400">Liga Demo MatchMind</span>
+                    <span class="text-xs bg-amber-500/20 text-amber-400 px-2.5 py-0.5 rounded-full font-semibold">Programado</span>
+                </div>
+                
+                <div class="flex justify-between items-center my-4">
+                    <div class="text-center space-y-1 w-1/3">
+                        <div class="w-10 h-10 mx-auto bg-emerald-600/30 border border-emerald-500 rounded-full flex items-center justify-center font-bold text-emerald-300 text-xs">RD</div>
+                        <div class="font-bold text-sm">Real Demo CF</div>
+                    </div>
+                    <div class="text-sm font-black text-slate-500">VS</div>
+                    <div class="text-center space-y-1 w-1/3">
+                        <div class="w-10 h-10 mx-auto bg-rose-600/30 border border-rose-500 rounded-full flex items-center justify-center font-bold text-rose-300 text-xs">AF</div>
+                        <div class="font-bold text-sm">Atlético Ficticio</div>
+                    </div>
+                </div>
+
+                <div class="text-xs text-slate-400 text-center mb-4">Sábado, 24 oct - 18:30</div>
+                <a href="predicciones.html" class="block text-center w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-2 rounded-lg text-xs transition">Hacer Predicción</a>
+            </div>
+
+            <!-- Partido 3: Próximo -->
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-5 shadow-lg hover:border-emerald-500/50 transition">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs text-slate-400">Copa Demo</span>
+                    <span class="text-xs bg-amber-500/20 text-amber-400 px-2.5 py-0.5 rounded-full font-semibold">Programado</span>
+                </div>
+                
+                <div class="flex justify-between items-center my-4">
+                    <div class="text-center space-y-1 w-1/3">
+                        <div class="w-10 h-10 mx-auto bg-blue-600/30 border border-blue-500 rounded-full flex items-center justify-center font-bold text-blue-300 text-xs">ZUR</div>
+                        <div class="font-bold text-sm">Zurich FC</div>
+                    </div>
+                    <div class="text-sm font-black text-slate-500">VS</div>
+                    <div class="text-center space-y-1 w-1/3">
+                        <div class="w-10 h-10 mx-auto bg-amber-600/30 border border-amber-500 rounded-full flex items-center justify-center font-bold text-amber-300 text-xs">VAL</div>
+                        <div class="font-bold text-sm">Valenia AC</div>
+                    </div>
+                </div>
+
+                <div class="text-xs text-slate-400 text-center mb-4">Domingo, 25 oct - 21:00</div>
+                <a href="predicciones.html" class="block text-center w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-2 rounded-lg text-xs transition">Hacer Predicción</a>
+            </div>
+
+            <!-- Partido 4: Finalizado -->
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-5 shadow-lg opacity-80">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs text-slate-400">Liga Demo MatchMind</span>
+                    <span class="text-xs bg-slate-700 text-slate-300 px-2.5 py-0.5 rounded-full font-semibold">Finalizado</span>
+                </div>
+                
+                <div class="flex justify-between items-center my-4">
+                    <div class="text-center space-y-1 w-1/3">
+                        <div class="w-10 h-10 mx-auto bg-indigo-600/30 border border-indigo-500 rounded-full flex items-center justify-center font-bold text-indigo-300 text-xs">NOR</div>
+                        <div class="font-bold text-sm">Nordic Utd</div>
+                    </div>
+                    <div class="text-xl font-black text-slate-300 tracking-widest bg-slate-900/80 px-3 py-1 rounded-lg border border-slate-700">
+                        3 - 0
+                    </div>
+                    <div class="text-center space-y-1 w-1/3">
+                        <div class="w-10 h-10 mx-auto bg-blue-600/30 border border-blue-500 rounded-full flex items-center justify-center font-bold text-blue-300 text-xs">ZUR</div>
+                        <div class="font-bold text-sm">Zurich FC</div>
+                    </div>
+                </div>
+
+                <div class="text-xs text-slate-400 text-center mb-4">Resultado Oficial</div>
+                <a href="predicciones.html" class="block text-center w-full bg-slate-700 hover:bg-slate-600 text-white font-medium py-2 rounded-lg text-xs transition">Ver Resumen y Puntos</a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+        function changeSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(() => changeSlide(1), 5000);
+    </script>
+</body>
+</html>

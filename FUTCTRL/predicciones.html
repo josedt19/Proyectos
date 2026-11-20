@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicciones | FUTCTRL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+    
+    <!-- Navbar Superior -->
+    <header class="border-b border-slate-800 bg-slate-950/70 sticky top-0 z-50 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="text-2xl font-black text-emerald-400 tracking-wider">FUTCTRL</a>
+                <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-medium">BETA 1.0</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="index.html" class="text-slate-300 hover:text-emerald-300 transition">Inicio</a>
+                <a href="carrera.html" class="text-slate-300 hover:text-emerald-300 transition">Modo Carrera</a>
+                <a href="partidos.html" class="text-slate-300 hover:text-emerald-300 transition">Partidos</a>
+                <a href="predicciones.html" class="text-slate-300 hover:text-emerald-300 transition">Predicciones</a>
+                <a href="entrenador.html" class="text-slate-300 hover:text-emerald-300 transition">Entrenador</a>
+                <a href="retos.html" class="text-slate-300 hover:text-emerald-300 transition">Retos</a>
+                <a href="clasificacion.html" class="text-slate-300 hover:text-emerald-300 transition">Clasificación</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="perfil.html" class="text-sm text-slate-300 hover:text-white transition">Perfil</a>
+                <a href="admin.html" class="text-sm text-slate-300 hover:text-white transition">Admin</a>
+                <a href="login.html" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-emerald-900/40">Entrar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+        
+        <!-- BANNER DE IMAGEN EN LA CABECERA (AÑADIDO SIN MODIFICAR EL RESTO) -->
+        <div class="relative w-full h-48 rounded-2xl overflow-hidden shadow-2xl border border-slate-800 flex items-center p-8">
+            <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?q=80&w=1600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover brightness-50" alt="Celebración gol">
+            <div class="relative z-10 space-y-1 max-w-xl">
+                <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase">🎯 Zona de Pronósticos</span>
+                <h1 class="text-2xl font-black text-white">Anticípate al Resultado y al MVP</h1>
+            </div>
+        </div>
+
+        <!-- Cabecera -->
+        <div class="bg-slate-800/40 border border-slate-700/60 p-6 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h2 class="text-2xl font-black text-white flex items-center gap-2">🎯 Centro de Predicciones</h2>
+                <p class="text-slate-400 text-sm mt-1">Acierta el marcador y al jugador destacado para sumar puntos en la clasificación general.</p>
+            </div>
+            <div class="bg-emerald-500/10 border border-emerald-500/30 px-4 py-2 rounded-xl text-center">
+                <div class="text-xs text-slate-400">Tus Puntos de Pronóstico</div>
+                <div class="text-lg font-black text-emerald-400">125 Pts</div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Predicción Activa -->
+        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 md:p-8 shadow-xl space-y-6">
+            <div class="flex justify-between items-center border-b border-slate-700/50 pb-4">
+                <span class="text-xs font-semibold uppercase tracking-wider text-emerald-400">Liga Demo FUTCTRL • Jornada 7</span>
+                <span class="text-xs bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full font-semibold">Cierra en 4 horas</span>
+            </div>
+
+            <!-- Enfrentamiento -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <!-- Equipo Local -->
+                <div class="text-center space-y-2">
+                    <div class="w-16 h-16 mx-auto bg-emerald-600/30 border-2 border-emerald-500 rounded-full flex items-center justify-center font-bold text-emerald-300 text-lg shadow-lg">RD</div>
+                    <div class="font-bold text-lg">Real Demo CF</div>
+                    <span class="text-xs text-slate-400 block">Local</span>
+                </div>
+
+                <!-- Selectores de Goles -->
+                <div class="flex justify-center items-center gap-4">
+                    <input type="number" min="0" max="10" value="2" class="w-16 h-16 bg-slate-900 border-2 border-emerald-500/60 rounded-xl text-center text-2xl font-black text-white focus:outline-none focus:border-emerald-400 shadow-inner">
+                    <span class="text-xl font-bold text-slate-500">-</span>
+                    <input type="number" min="0" max="10" value="1" class="w-16 h-16 bg-slate-900 border-2 border-slate-700 rounded-xl text-center text-2xl font-black text-white focus:outline-none focus:border-emerald-400 shadow-inner">
+                </div>
+
+                <!-- Equipo Visitante -->
+                <div class="text-center space-y-2">
+                    <div class="w-16 h-16 mx-auto bg-indigo-600/30 border-2 border-indigo-500 rounded-full flex items-center justify-center font-bold text-indigo-300 text-lg shadow-lg">AF</div>
+                    <div class="font-bold text-lg">Atlético Ficticio</div>
+                    <span class="text-xs text-slate-400 block">Visitante</span>
+                </div>
+            </div>
+
+            <!-- Selección de Jugador Destacado (MVP) -->
+            <div class="pt-4 border-t border-slate-700/50 space-y-3">
+                <label class="block text-sm font-bold text-slate-200">⭐ Selecciona el Jugador Destacado (MVP del partido):</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-emerald-500 rounded-xl cursor-pointer hover:bg-slate-900 transition">
+                        <input type="radio" name="mvp" checked class="accent-emerald-500">
+                        <span class="text-xs font-semibold text-slate-200">Vinícius D.</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:bg-slate-900 transition">
+                        <input type="radio" name="mvp" class="accent-emerald-500">
+                        <span class="text-xs font-semibold text-slate-200">Lewan_Demo</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:bg-slate-900 transition">
+                        <input type="radio" name="mvp" class="accent-emerald-500">
+                        <span class="text-xs font-semibold text-slate-200">Yamal_Demo</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:bg-slate-900 transition">
+                        <input type="radio" name="mvp" class="accent-emerald-500">
+                        <span class="text-xs font-semibold text-slate-200">Pedri_Demo</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Botón Enviar con Confirmación -->
+            <div class="pt-4">
+                <button onclick="confirmPrediction()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-emerald-900/40 text-sm flex items-center justify-center gap-2">
+                    ✅ Guardar y Enviar Predicción
+                </button>
+            </div>
+        </div>
+
+        <!-- Historial de Predicciones Anteriores -->
+        <div class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6 space-y-4">
+            <h2 class="text-lg font-bold text-white">📋 Tus Predicciones Anteriores</h2>
+            <div class="space-y-3">
+                <div class="flex flex-col sm:flex-row justify-between items-center p-4 bg-slate-800/80 rounded-xl border border-slate-700/50 gap-3">
+                    <div class="text-sm">
+                        <span class="font-bold text-slate-200">Bojangles 2 - 1 Nordic Utd</span>
+                        <span class="text-xs text-slate-400 block mt-0.5">MVP elegido: Mbappé_Demo</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs bg-emerald-500/20 text-emerald-400 font-bold px-3 py-1 rounded-full border border-emerald-500/30">+15 Puntos (Acertado)</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-between items-center p-4 bg-slate-800/80 rounded-xl border border-slate-700/50 gap-3">
+                    <div class="text-sm">
+                        <span class="font-bold text-slate-200">Zurich FC 0 - 2 Valenia AC</span>
+                        <span class="text-xs text-slate-400 block mt-0.5">MVP elegido: Gavi_Demo</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs bg-slate-700 text-slate-300 font-semibold px-3 py-1 rounded-full">Pendiente de resolver</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function confirmPrediction() {
+            if(confirm("¿Estás seguro de enviar esta predicción? Una vez guardada, no se podrá modificar antes del inicio del partido.")) {
+                alert("¡Predicción guardada con éxito! Mucha suerte.");
+            }
+        }
+    </script>
+</body>
+</html>

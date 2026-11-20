@@ -1,0 +1,40 @@
+# FUTCTRL · entorno local: base de datos PostgreSQL + backend FastAPI.
+# Las variables salen del archivo .env. Si falta alguna obligatoria, Compose se detiene con un mensaje.
+services:
+  db:
+    image: postgres:16
+    container_name: FUTCTRL-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?Falta POSTGRES_USER en .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Falta POSTGRES_PASSWORD en .env}
+      POSTGRES_DB: ${POSTGRES_DB:?Falta POSTGRES_DB en .env}
+    volumes:
+      - FUTCTRL_pgdata:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:${DB_PORT:-5432}:5432"   # solo accesible desde tu propio equipo
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: ./backend
+    container_name: FUTCTRL-api
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_HOST: db          # dentro de Docker, la base de datos se llama "db"
+      POSTGRES_PORT: "5432"
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${API_PORT:-8000}:8000"
+    volumes:
+      - ./backend:/code          # el código se actualiza al guardar (recarga automática)
+      - ./frontend:/frontend:ro  # el frontend se sirve desde la propia API
+
+volumes:
+  FUTCTRL_pgdata:

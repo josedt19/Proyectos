@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario | FUTCTRL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+    
+    <!-- Navbar Superior -->
+    <header class="border-b border-slate-800 bg-slate-950/70 sticky top-0 z-50 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="text-2xl font-black text-emerald-400 tracking-wider">FUTCTRL</a>
+                <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-medium">BETA 1.0</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="index.html" class="text-slate-300 hover:text-emerald-300 transition">Inicio</a>
+                <a href="carrera.html" class="text-slate-300 hover:text-emerald-300 transition">Modo Carrera</a>
+                <a href="partidos.html" class="text-slate-300 hover:text-emerald-300 transition">Partidos</a>
+                <a href="predicciones.html" class="text-slate-300 hover:text-emerald-300 transition">Predicciones</a>
+                <a href="entrenador.html" class="text-slate-300 hover:text-emerald-300 transition">Entrenador</a>
+                <a href="retos.html" class="text-slate-300 hover:text-emerald-300 transition">Retos</a>
+                <a href="clasificacion.html" class="text-slate-300 hover:text-emerald-300 transition">Clasificación</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="perfil.html" class="text-sm text-slate-300 hover:text-white transition">Perfil</a>
+                <a href="admin.html" class="text-sm text-slate-300 hover:text-white transition">Admin</a>
+                <a href="login.html" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-emerald-900/40">Entrar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+        
+        <!-- Tarjeta de Usuario Principal -->
+        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div class="flex items-center gap-4">
+                <div class="w-16 h-16 rounded-full bg-emerald-600 text-white font-black text-2xl flex items-center justify-center border-2 border-emerald-400 shadow-lg">
+                    ED
+                </div>
+                <div>
+                    <h1 class="text-2xl font-black text-white" id="display-username">Entrenador_Demo</h1>
+                    <span class="text-xs text-slate-400" id="display-email">demo@matchmind.com</span>
+                    <div class="mt-2 flex gap-2">
+                        <span class="text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2.5 py-0.5 rounded-full font-bold">Rol: Usuario Normal</span>
+                        <span class="text-[10px] bg-slate-700 text-slate-300 px-2.5 py-0.5 rounded-full font-bold">Rango #6</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total de Puntos -->
+            <div class="bg-slate-900/80 border border-slate-700 p-4 rounded-xl text-center w-full md:w-auto">
+                <span class="text-xs text-slate-400 block font-medium">Puntos Totales Acumulados</span>
+                <span class="text-3xl font-black text-emerald-400">125 Pts</span>
+            </div>
+        </div>
+
+        <!-- Formulario Editable de Datos Personales -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <div class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6 space-y-4">
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">✏️ Edición de Perfil</h2>
+                
+                <form onsubmit="updateProfile(event)" class="space-y-4 text-xs">
+                    <div>
+                        <label class="text-slate-400 block mb-1">Nombre de usuario:</label>
+                        <input type="text" id="input-username" value="Entrenador_Demo" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-slate-200 font-semibold focus:outline-none focus:border-emerald-400">
+                    </div>
+                    <div>
+                        <label class="text-slate-400 block mb-1">Correo electrónico:</label>
+                        <input type="email" id="input-email" value="demo@matchmind.com" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-slate-200 font-semibold focus:outline-none focus:border-emerald-400">
+                    </div>
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-lg transition">
+                        Guardar Cambios
+                    </button>
+                </form>
+            </div>
+
+            <!-- Cambio de Contraseña -->
+            <div class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6 space-y-4">
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">🔒 Seguridad y Contraseña</h2>
+                
+                <form onsubmit="updatePassword(event)" class="space-y-3 text-xs">
+                    <div>
+                        <label class="text-slate-400 block mb-1">Contraseña actual:</label>
+                        <input type="password" required placeholder="••••••••" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-slate-200 focus:outline-none focus:border-emerald-400">
+                    </div>
+                    <div>
+                        <label class="text-slate-400 block mb-1">Nueva contraseña:</label>
+                        <input type="password" required placeholder="••••••••" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-slate-200 focus:outline-none focus:border-emerald-400">
+                    </div>
+                    <button type="submit" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-bold py-2.5 rounded-lg transition">
+                        Actualizar Contraseña Seguro
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Historial Inmutable de Puntos -->
+        <div class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6 space-y-4">
+            <h2 class="text-lg font-bold text-white">📜 Historial de Actividad y Puntos</h2>
+            <div class="space-y-2 text-xs">
+                <div class="flex justify-between items-center p-3 bg-slate-800/80 rounded-xl border border-slate-700/50">
+                    <div>
+                        <span class="font-bold text-slate-200 block">Reto Táctico Resuelto: Presión 4-4-2</span>
+                        <span class="text-[10px] text-slate-400">Categoría: Táctica • 14/10/2026</span>
+                    </div>
+                    <span class="font-black text-emerald-400 text-sm">+15 Pts</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-slate-800/80 rounded-xl border border-slate-700/50">
+                    <div>
+                        <span class="font-bold text-slate-200 block">Predicción Acertada: Bojangles vs Nordic Utd</span>
+                        <span class="text-[10px] text-slate-400">Categoría: Predicción • 13/10/2026</span>
+                    </div>
+                    <span class="font-black text-emerald-400 text-sm">+10 Pts</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function updateProfile(e) {
+            e.preventDefault();
+            const newName = document.getElementById('input-username').value;
+            const newEmail = document.getElementById('input-email').value;
+
+            document.getElementById('display-username').innerText = newName;
+            document.getElementById('display-email').innerText = newEmail;
+            alert("¡Perfil actualizado con éxito!");
+        }
+
+        function updatePassword(e) {
+            e.preventDefault();
+            alert("¡Contraseña actualizada de forma segura mediante hash!");
+        }
+    </script>
+</body>
+</html>
